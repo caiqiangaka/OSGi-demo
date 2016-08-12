@@ -1,0 +1,42 @@
+package org.qiang.devappbundle;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
+
+public class BaseTest {
+	
+	private static IpcMsgProtoLib ipc_lib;
+	
+	private JFrame mainWin;
+	private JPanel contentPane;
+	
+	public BaseTest( IpcMsgProtoLib ipc_lib_param ) {
+		ipc_lib = ipc_lib_param;
+	}
+	
+	public boolean init() {
+		mainWin = new JFrame();
+		mainWin.setTitle("OSL3030 Test");
+		//mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//mainWin.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		mainWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		mainWin.setLayout(null);
+		mainWin.setBounds(100, 100, 550, 500);
+		mainWin.setVisible(true);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainWin.setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		return true;
+	}
+	
+	public boolean close() {
+		mainWin.dispose();
+		return true;
+	}
+}

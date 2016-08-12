@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<bundle bundleID="457" class="org.osgidemo.dbvalidatorbundle.Activator" localization="OSGI-INF/l10n/bundle" name="DBValidatorBundle" project="DBValidatorBundle" provider="CQ"/>
+	<bundle bundleID="456" class="org.osgidemo.configfilevalidatorbundle.Activator" localization="OSGI-INF/l10n/bundle" name="ConfigFileValidatorBundle" project="ConfigFileValidatorBundle" provider="CQ"/>
+	<bundle bundleID="455" class="org.qiang.numcmdipcmsgprotolibimplbundle.Activator" localization="OSGI-INF/l10n/bundle" name="NumCmdIpcMsgProtoLibImplBundle" project="NumCmdIpcMsgProtoLibImplBundle" provider="CQ"/>
+	<bundle bundleID="454" class="org.qiang.ipcmsgprotolibbundle.Activator" localization="OSGI-INF/l10n/bundle" name="IpcMsgProtoLibBundle" project="IpcMsgProtoLibBundle" provider="CQ"/>
+	<bundle bundleID="459" class="org.osgidemo.uservalidatorbundle.Activator" localization="OSGI-INF/l10n/bundle" name="UserValidatorBundle" project="UserValidatorBundle" provider="CQ"/>
+	<bundle bundleID="462" class="org.qiang.devappbundle.Activator" localization="OSGI-INF/l10n/bundle" name="DevAppBundle" project="DevAppBundle" provider="CQ"/>
+	<bundle bundleID="460" class="org.osgidemo.uservalidatorguibundle.Activator" localization="OSGI-INF/l10n/bundle" name="UserValidatorGUIBundle" project="UserValidatorGUIBundle" provider="CQ"/>
+	<bundle bundleID="463" class="org.qiang.ipccommunicationbundle.Activator" localization="OSGI-INF/l10n/bundle" name="IpcCommunicationBundle" project="IpcCommunicationBundle" provider="CQ"/>
+	<bundle bundleID="451" class="org.qiang.udpipccommunicationimplbundle.Activator" localization="OSGI-INF/l10n/bundle" name="UdpIpcCommunicationImplBundle" project="UdpIpcCommunicationImplBundle" provider="CQ"/>
+	<bundle bundleID="461" class="org.osgidemo.uservalidatorwebbundle.Activator" localization="OSGI-INF/l10n/bundle" name="UserValidatorWebBundle" project="UserValidatorWebBundle" provider="CQ"/>
+	<bundle bundleID="458" class="org.osgidemo.ldapvalidatorbundle.Activator" localization="OSGI-INF/l10n/bundle" name="LDAPValidatorBundle" project="LDAPValidatorBundle" provider="CQ"/>
+</map>

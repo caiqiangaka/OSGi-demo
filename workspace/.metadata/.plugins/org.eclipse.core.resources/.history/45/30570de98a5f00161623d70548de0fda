@@ -1,0 +1,148 @@
+package org.osgidemo.uservalidatorguibundle;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgidemo.uservalidatorbundle.service.user.Validator;
+
+public class Activator implements BundleActivator {
+
+	private static BundleContext context;
+	
+	public static final String gStrFont = "ËÎÌו";
+	public static final int gStrFontSize = 12;
+	
+	private JFrame mainWin;
+	private static JTextField userNameJT;
+	private static JLabel userNameJL;
+	private static JTextField passwdJT;
+	private static JLabel passwdJL;
+	private static JButton loginJB;
+	private static JLabel resultJL;
+
+	static BundleContext getContext() {
+		return context;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+	 */
+	public void start(BundleContext bundleContext) throws Exception {
+		Activator.context = bundleContext;
+		
+		int num = 300;
+		byte str_byte[] = new byte[2];
+		str_byte[0] = (byte)( ( num >> 8 ) & 0xff );
+		str_byte[1] = (byte)( num >> 8 & 0xff );
+		System.out.printf("str : %d\n", str_byte[0] );
+		System.out.printf("str : %d\n", str_byte[1] );
+		
+		String str = new String( str_byte );
+		int i = 0;
+		byte tmp[] = str.getBytes();
+		for ( i = 0; i < str.length(); i++ ) {
+			System.out.printf("str : %d\n", tmp[i] );
+		}
+		
+		//String str1 = 
+		
+		/*
+		mainWin = new JFrame();
+		mainWin.setTitle("Test");
+		//mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//mainWin.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		mainWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		mainWin.setLayout(null);
+		mainWin.setBounds(100, 100, 550, 500);
+		mainWin.setVisible(true);
+		
+		JPanel contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainWin.setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		userNameJL = new JLabel("UserName");
+		userNameJL.setBounds(5, 5, 100, 23);
+		userNameJL.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(userNameJL);
+		
+		userNameJT = new JTextField();
+		userNameJT.setBounds(115, 5, 200, 23);
+		userNameJT.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(userNameJT);
+		
+		passwdJL = new JLabel("Password");
+		passwdJL.setBounds(5, 35, 100, 23);
+		passwdJL.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(passwdJL);
+		
+		passwdJT = new JTextField();
+		passwdJT.setBounds(115, 35, 200, 23);
+		passwdJT.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(passwdJT);
+		
+		resultJL = new JLabel("Result");
+		resultJL.setBounds(100, 65, 100, 23);
+		resultJL.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(resultJL);
+
+		JButton loginJB = new JButton("Login");
+		loginJB.setBounds(5, 65, 88, 23);
+		loginJB.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(loginJB);
+		
+		loginJB.addActionListener(new ActionListener() {   
+			public void actionPerformed(ActionEvent e) {
+				String username = userNameJT.getText();
+				String password = passwdJT.getText();
+				
+				System.out.println("Username : " + username);
+				System.out.println("Password : " + password);
+				
+				ServiceReference serviceRef = context.getServiceReference(Validator.class.getName());
+				Validator validator = (Validator)context.getService(serviceRef);
+				if(validator==null){
+		            resultJL.setText("No usable validator service");
+		            return;
+		        }
+		        boolean result=false;
+		        try {
+		            result=validator.validate(username, password);
+		            if(result)
+		            	resultJL.setText("Login success");
+		            else
+		            	resultJL.setText("Login fail");
+		            return;
+		        } 
+		        catch (Exception err) {
+		        	resultJL.setText("Login error");
+		            return;
+		        }
+			}   
+		});
+		
+		contentPane.repaint();
+		*/
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 */
+	public void stop(BundleContext bundleContext) throws Exception {
+		//mainWin.dispose();
+		Activator.context = null;
+	}
+
+}

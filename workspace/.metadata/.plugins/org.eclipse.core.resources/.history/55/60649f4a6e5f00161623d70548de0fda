@@ -1,0 +1,8 @@
+package org.qiang.ipcmsgprotolibbundle.service.user;
+
+public interface IpcMsgProtoLib {
+	public boolean init( String dev ) throws Exception;
+	public int send( String send_buf ) throws Exception;
+	public String receiv() throws Exception;
+	public boolean close() throws Exception;
+}

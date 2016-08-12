@@ -1,0 +1,59 @@
+package org.qiang.udpipccommunicationimplbundle.impl;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import org.qiang.ipccommunicationbundle.service.user.*;
+
+public class UdpIpcCommunicationImpl implements IpcCommunication {
+	private DatagramSocket client_sock;
+	private String server_ip;
+	private static int server_port = 44245;
+	
+	public boolean init( String dev ) throws Exception {
+		server_ip = dev;
+		try {
+			client_sock = new DatagramSocket();
+		} catch (SocketException e) {
+            System.err.println("Can't open socket");
+            e.printStackTrace();
+            return false;
+        }
+		
+		return true;
+	}
+	
+	public int send( String send_buf ) throws Exception {
+		byte[] send_buf_byte;
+		InetAddress server_addr;
+		
+		send_buf_byte = send_buf.getBytes();
+		try {
+			server_addr = InetAddress.getByName( server_ip );
+		} catch (UnknownHostException e) {
+			System.err.println("Cannot find host");
+			e.printStackTrace();
+		}
+		DatagramPacket send_packet = new DatagramPacket( send_buf_byte, send_buf_byte.length, server_addr, server_port );
+		client_sock.send( send_packet );
+		
+		return -1;
+	}
+	
+	public String receiv()  throws Exception {
+		byte[] recv_buf = new byte[4096];
+		DatagramPacket recv_packet = new DatagramPacket( recv_buf , recv_buf.length );
+		client_sock.receive( recv_packet );
+		
+		return new String( recv_packet.getData(), 0,recv_packet.getLength() );
+	}
+	
+	public boolean close() throws Exception {
+		client_sock.close();
+		
+		return true;
+	}
+}

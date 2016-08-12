@@ -1,0 +1,53 @@
+package org.qiang.devappbundle;
+
+import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
+
+class StSoftwareVersion {
+	public byte[] soft_ver;
+	
+	public StSoftwareVersion( String str_ver ) {
+		byte[] tmp_ver;
+		
+		soft_ver = new byte[32];
+		tmp_ver = str_ver.getBytes();
+		System.arraycopy( tmp_ver, 0, soft_ver, 0, 32 );
+	}
+	
+	public String toStringData() {
+		return new String( soft_ver );
+	}
+	
+	public boolean dataPaser( String data ) {
+		byte[] tmp_ver = data.getBytes();
+		System.arraycopy( tmp_ver, 0, soft_ver, 0, 32 );
+		
+		return true;
+	}
+}
+
+public class CommonSystem {
+	public static final int GET_SOFTWARE_VER_HOST_CMD = 20;
+	
+	public String commandToString( int cmd ) {
+		byte[] cmd_byte = new byte[2];
+		cmd_byte[0] = (byte)( ( cmd >> 8 ) & 0xff );
+		cmd_byte[1] = (byte)( cmd & 0xff );
+		
+		return new String( cmd_byte );
+	}
+	
+	public StSoftwareVersion get_software_ver_ipc_lib( StSoftwareVersion stSoftVer ) {
+		Login login = Activator.getLogin();
+		IpcMsgProtoLib ipc_lib = login.getIpcMsgProtoLib();
+		String receiv_data;
+		
+		try {
+			receiv_data = ipc_lib.cmd_ipc_lib( stSoftVer.toStringData(), commandToString( GET_SOFTWARE_VER_HOST_CMD ) );
+		} catch ( Exception err ) {
+			err.printStackTrace();
+		}
+		stSoftVer.dataPaser( receiv_data );
+		
+		return stSoftVer;
+	}
+}

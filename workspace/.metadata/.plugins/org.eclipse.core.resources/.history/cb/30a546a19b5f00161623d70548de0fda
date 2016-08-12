@@ -1,0 +1,9 @@
+package org.qiang.devappbundle;
+
+import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
+
+public class BaseTest {
+	public BaseTest(IpcMsgProtoLib ipc_lib) {
+		
+	}
+}

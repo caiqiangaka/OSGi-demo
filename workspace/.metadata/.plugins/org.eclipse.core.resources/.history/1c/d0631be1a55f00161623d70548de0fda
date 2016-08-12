@@ -1,0 +1,98 @@
+package org.qiang.devappbundle;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
+
+public class BaseTest {
+	
+	private JFrame mainWin;
+	private JPanel contentPane;
+	
+	private static JButton getSoftVerJB;
+	private static JLabel resultJL;
+	
+	public BaseTest() {
+	}
+	
+	public boolean init() {
+		
+		System.out.println("BaseTest init ...");
+		
+		mainWin = new JFrame();
+		mainWin.setTitle("OSL3030 Test");
+		//mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//mainWin.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		mainWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		mainWin.setLayout(null);
+		mainWin.setBounds(100, 100, 550, 500);
+		mainWin.setVisible(true);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainWin.setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton loginJB = new JButton("Login");
+		loginJB.setBounds(5, 95, 88, 23);
+		loginJB.setFont(new java.awt.Font(gStrFont,0,gStrFontSize));
+		contentPane.add(loginJB);
+		
+		loginJB.addActionListener(new ActionListener() {   
+			public void actionPerformed(ActionEvent e) {
+				String username = userNameJT.getText();
+				String password = passwdJT.getText();
+				String deviceip = ipaddrJT.getText();
+				
+				System.out.println("Username  : " + username);
+				System.out.println("Password  : " + password);
+				System.out.println("Device IP : " + deviceip);
+				
+				service_ref = context.getServiceReference(IpcMsgProtoLib.class.getName());
+				ipc_lib = (IpcMsgProtoLib)context.getService( service_ref );
+				if( null == ipc_lib ) {
+		            resultJL.setText("No usable IpcMsgProtoLib service");
+		            return;
+		        }
+				
+		        boolean result = false;
+		        try {
+		            result = ipc_lib.init( deviceip );
+		            if(result)
+		            {
+		            	resultJL.setText("Login success");
+		            	base_test = new BaseTest();
+		            	base_test.init();
+		            }
+		            else
+		            {
+		            	resultJL.setText("Login fail");
+		            }
+		            return;
+		        } catch ( Exception err ) {
+		        	resultJL.setText("Login error");
+		            return;
+		        }
+			}   
+		});
+		
+		contentPane.repaint();
+		
+		return true;
+	}
+	
+	public boolean close() {
+		
+		System.out.println("BaseTest close ...");
+		
+		mainWin.dispose();
+		return true;
+	}
+}

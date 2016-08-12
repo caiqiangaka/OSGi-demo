@@ -1,0 +1,62 @@
+!SESSION 2016-08-11 14:07:48.599 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_67
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -dev file:D:/Java/OSGI/eclipse-SDK-4.2-win32-x86_64/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/UserValidatorWeb/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog -console
+
+!ENTRY UserValidatorGUIBundle 4 0 2016-08-11 14:07:49.384
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.osgidemo.uservalidatorguibundle.Activator.start() of bundle UserValidatorGUIBundle.
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:734)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1177)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+Caused by: java.util.IllegalFormatConversionException: x != java.lang.String
+	at java.util.Formatter$FormatSpecifier.failConversion(Unknown Source)
+	at java.util.Formatter$FormatSpecifier.printInteger(Unknown Source)
+	at java.util.Formatter$FormatSpecifier.print(Unknown Source)
+	at java.util.Formatter.format(Unknown Source)
+	at java.io.PrintStream.format(Unknown Source)
+	at java.io.PrintStream.printf(Unknown Source)
+	at org.apache.felix.gogo.runtime.threadio.ThreadPrintStream.printf(ThreadPrintStream.java:210)
+	at org.osgidemo.uservalidatorguibundle.Activator.start(Activator.java:50)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	... 12 more
+Root exception:
+java.util.IllegalFormatConversionException: x != java.lang.String
+	at java.util.Formatter$FormatSpecifier.failConversion(Unknown Source)
+	at java.util.Formatter$FormatSpecifier.printInteger(Unknown Source)
+	at java.util.Formatter$FormatSpecifier.print(Unknown Source)
+	at java.util.Formatter.format(Unknown Source)
+	at java.io.PrintStream.format(Unknown Source)
+	at java.io.PrintStream.printf(Unknown Source)
+	at org.apache.felix.gogo.runtime.threadio.ThreadPrintStream.printf(ThreadPrintStream.java:210)
+	at org.osgidemo.uservalidatorguibundle.Activator.start(Activator.java:50)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1177)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)

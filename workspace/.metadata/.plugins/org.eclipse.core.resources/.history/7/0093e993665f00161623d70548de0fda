@@ -1,0 +1,7 @@
+package org.qiang.ipccommunicationbundle.service.user;
+
+public interface IpcCommunication {
+	public boolean init( String dev ) throws Exception;
+	public int send( ) throws Exception;
+	public int receiv()  throws Exception;
+}

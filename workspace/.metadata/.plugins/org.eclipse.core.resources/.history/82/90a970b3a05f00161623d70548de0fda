@@ -1,0 +1,17 @@
+package org.qiang.devappbundle;
+
+class StSoftwareVersion {
+	public byte[] soft_ver;
+	
+	public StSoftwareVersion() {
+		soft_ver = new byte[32];
+	}
+	
+	public String toString() {
+		return new String( soft_ver );
+	}
+}
+
+public class CommonSystem {
+	
+}

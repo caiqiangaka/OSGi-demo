@@ -1,0 +1,79 @@
+package org.qiang.numcmdipcmsgprotolibimplbundle.impl;
+
+import java.util.Arrays;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.qiang.numcmdipcmsgprotolibimplbundle.Activator;
+import org.qiang.ipccommunicationbundle.service.user.IpcCommunication;
+import org.qiang.ipcmsgprotolibbundle.service.user.*;
+
+public class NumCmdIpcMsgProtoLibImpl implements IpcMsgProtoLib {
+	
+	BundleContext context;
+	ServiceReference service_ref;
+	IpcCommunication ipc_commu;
+	private byte[] msg_send_buf;
+	
+	private static final int client_type_pos = 0;
+	private static final int ipc_protocol_ver_pos = 1;
+	private static final int msg_segs_pos = 2;
+	private static final int msg_type_pos = 3;
+	private static final int msg_len_pos = 5;
+	private static final int command_type_pos = 7;
+	private static final int corr_tag_pos = 9;
+	private static final int data_len_pos = 11;
+	private static final int data_pos = 13;
+	
+	private static final int ipc_frm_hdr_size = 3;
+	private static final int ipc_msg_hdr_size = 4;
+	private static final int host_cmd_size = 6;
+	
+	private static final byte SnmpClient = 1;
+	private static final byte CliClient = 2;
+	private static final byte WebClient = 3;
+	
+	private static final byte PassThrMsgType = 0;
+	private static final byte ConfigMsgType = 1;
+	
+	public boolean init( String dev ) throws Exception {
+		context = Activator.getContext();
+		service_ref = context.getServiceReference( IpcCommunication.class.getName() );
+		ipc_commu = (IpcCommunication)context.getService( service_ref );
+		if( null == ipc_commu ) {
+			System.err.println( "No usable IpcCommunication service" );
+            return false;
+        }
+		
+		msg_send_buf = new byte[4096];
+		
+		return ipc_commu.init( dev );
+	}
+	
+	public String cmd_ipc_lib( String data, String cmd ) throws Exception {
+		
+		int data_len = data.length();
+		int send_len = data_len + ipc_frm_hdr_size + ipc_msg_hdr_size + host_cmd_size;
+		
+		Arrays.fill( msg_send_buf, (byte)0 );
+		
+		msg_send_buf[client_type_pos] = CliClient;
+		msg_send_buf[ipc_protocol_ver_pos] = (byte)0x1;
+		msg_send_buf[msg_segs_pos] = (byte)0x1;
+		
+		msg_send_buf[msg_type_pos] = (byte)0x0;
+		msg_send_buf[msg_type_pos + 1] = ConfigMsgType;
+		
+		msg_send_buf[msg_len_pos] = (byte)( ( ( send_len - ipc_frm_hdr_size ) >> 8 ) & 0xff );
+		msg_send_buf[msg_len_pos + 1] = (byte)( ( send_len - ipc_frm_hdr_size ) & 0xff );
+		
+		msg_send_buf[command_type_pos] = (byte)( ( ( send_len - ipc_frm_hdr_size ) >> 8 ) & 0xff );
+		msg_send_buf[command_type_pos + 1] = (byte)( ( send_len - ipc_frm_hdr_size ) & 0xff );
+		
+		return null;
+	}
+	
+	public boolean close() throws Exception {
+		return ipc_commu.close();
+	}
+}

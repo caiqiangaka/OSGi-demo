@@ -1,0 +1,5 @@
+package org.qiang.ipccommunicationbundle.service.user;
+
+public interface IpcCommunication {
+	public boolean init( String username ) throws Exception;
+}

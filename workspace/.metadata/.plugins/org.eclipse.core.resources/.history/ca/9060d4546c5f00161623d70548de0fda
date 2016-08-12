@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UdpIpcCommunicationImplBundle
+Bundle-SymbolicName: UdpIpcCommunicationImplBundle
+Bundle-Version: 1.0.0
+Bundle-Activator: org.qiang.udpipccommunicationimplbundle.Activator
+Bundle-Vendor: CQ
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.osgi.framework;version="1.3.0",
+ org.qiang.ipccommunicationbundle.service.user

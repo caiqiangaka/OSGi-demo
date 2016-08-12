@@ -1,0 +1,26 @@
+package org.qiang.devappbundle;
+
+class StSoftwareVersion {
+	public byte[] soft_ver;
+	
+	public StSoftwareVersion( String str_ver ) {
+		byte[] tmp_ver;
+		
+		soft_ver = new byte[32];
+		tmp_ver = str_ver.getBytes();
+		System.arraycopy( tmp_ver, 0, soft_ver, 0, 32 );
+	}
+	
+	public String toString() {
+		return new String( soft_ver );
+	}
+	
+	public boolean dataPaser( String data ) {
+		byte[] tmp_ver = data.getBytes();
+		return true;
+	}
+}
+
+public class CommonSystem {
+	
+}

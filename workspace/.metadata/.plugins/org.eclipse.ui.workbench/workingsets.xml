@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470879459168_8" label="org.qiang" name="org.qiang">
+<item elementID="=IpcMsgProtoLibBundle" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=NumCmdIpcMsgProtoLibImplBundle" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=DevAppBundle" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=UdpIpcCommunicationImplBundle" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=IpcCommunicationBundle" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470705213713_0" label="Window Working Set" name="Aggregate for window 1470705213712"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470705323467_1" label="Window Working Set" name="Aggregate for window 1470705323467"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470706716491_2" label="Window Working Set" name="Aggregate for window 1470706716490"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470710904036_3" label="Window Working Set" name="Aggregate for window 1470710904036"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470711482702_4" label="Window Working Set" name="Aggregate for window 1470711482701"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470790787902_5" label="Window Working Set" name="Aggregate for window 1470790787902"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470875817589_6" label="Window Working Set" name="Aggregate for window 1470875817589"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1470960524715_9" label="Window Working Set" name="Aggregate for window 1470960524715"/>
+<mruList name="org.qiang"/>
+</workingSetManager>
