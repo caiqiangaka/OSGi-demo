@@ -1,0 +1,1 @@
+java -Dorg.osgi.service.http.port=8080 -jar equinox.jar -console

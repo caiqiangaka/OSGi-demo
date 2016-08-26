@@ -1,0 +1,111 @@
+!SESSION 2016-08-26 09:56:46.725 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_67
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -console
+
+!ENTRY org.eclipse.equinox.http 4 0 2016-08-26 09:56:47.437
+!MESSAGE Port 8080 is use
+!STACK 0
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.eclipse.equinox.http.HttpServerSocket.<init>(HttpServerSocket.java:48)
+	at org.eclipse.equinox.http.HttpConfiguration.createServerSocket(HttpConfiguration.java:220)
+	at org.eclipse.equinox.http.HttpListener.setProperties(HttpListener.java:109)
+	at org.eclipse.equinox.http.HttpListener.<init>(HttpListener.java:56)
+	at org.eclipse.equinox.http.HttpConfiguration.createDefaultListeners(HttpConfiguration.java:138)
+	at org.eclipse.equinox.http.HttpConfiguration.initialize(HttpConfiguration.java:102)
+	at org.eclipse.equinox.http.HttpConfiguration.<init>(HttpConfiguration.java:90)
+	at org.eclipse.equinox.http.Http.start(Http.java:71)
+	at org.eclipse.equinox.http.Activator.start(Activator.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1177)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.equinox.http 4 0 2016-08-26 09:56:47.438
+!MESSAGE An unexpected IOException occurred
+!STACK 0
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.eclipse.equinox.http.HttpServerSocket.<init>(HttpServerSocket.java:48)
+	at org.eclipse.equinox.http.HttpConfiguration.createServerSocket(HttpConfiguration.java:220)
+	at org.eclipse.equinox.http.HttpListener.setProperties(HttpListener.java:109)
+	at org.eclipse.equinox.http.HttpListener.<init>(HttpListener.java:56)
+	at org.eclipse.equinox.http.HttpConfiguration.createDefaultListeners(HttpConfiguration.java:138)
+	at org.eclipse.equinox.http.HttpConfiguration.initialize(HttpConfiguration.java:102)
+	at org.eclipse.equinox.http.HttpConfiguration.<init>(HttpConfiguration.java:90)
+	at org.eclipse.equinox.http.Http.start(Http.java:71)
+	at org.eclipse.equinox.http.Activator.start(Activator.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1177)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.equinox.http 4 0 2016-08-26 09:56:47.439
+!MESSAGE An unexpected RuntimeException occurred
+!STACK 0
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at org.eclipse.equinox.http.HttpServerSocket.<init>(HttpServerSocket.java:48)
+	at org.eclipse.equinox.http.HttpConfiguration.createServerSocket(HttpConfiguration.java:220)
+	at org.eclipse.equinox.http.HttpListener.setProperties(HttpListener.java:109)
+	at org.eclipse.equinox.http.HttpListener.<init>(HttpListener.java:56)
+	at org.eclipse.equinox.http.HttpConfiguration.createDefaultListeners(HttpConfiguration.java:138)
+	at org.eclipse.equinox.http.HttpConfiguration.initialize(HttpConfiguration.java:102)
+	at org.eclipse.equinox.http.HttpConfiguration.<init>(HttpConfiguration.java:90)
+	at org.eclipse.equinox.http.Http.start(Http.java:71)
+	at org.eclipse.equinox.http.Activator.start(Activator.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1177)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)

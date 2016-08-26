@@ -56,7 +56,7 @@ public class BaseTest {
 		getSoftVerJB.addActionListener(new ActionListener() {   
 			public void actionPerformed(ActionEvent e) {
 				StSoftwareVersion stSoftVer = new StSoftwareVersion( null );
-				stSoftVer = CommonSystem.get_software_ver_ipc_lib( stSoftVer );
+				//stSoftVer = CommonSystem.get_software_ver_ipc_lib( stSoftVer );
 				String soft_ver = stSoftVer.getSoftVersion();
 				if ( null == soft_ver ) {
 					resultJL.setText( "" );

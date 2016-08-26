@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: DevAppBundle
-Bundle-SymbolicName: DevAppBundle
+Bundle-Name: DeviceMngImplBundle
+Bundle-SymbolicName: DeviceMngImplBundle
 Bundle-Version: 1.0.0
-Bundle-Activator: org.qiang.devappbundle.Activator
+Bundle-Activator: org.qiang.devicemngimplbundle.Activator
 Bundle-Vendor: CQ
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.osgi.framework;version="1.3.0",

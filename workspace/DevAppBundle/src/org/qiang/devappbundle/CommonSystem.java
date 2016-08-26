@@ -3,6 +3,7 @@ package org.qiang.devappbundle;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import org.qiang.devicemngbundle.service.user.DeviceMng;
 import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
 
 class StSoftwareVersion {
@@ -60,7 +61,13 @@ class StSoftwareVersion {
 }
 
 public class CommonSystem {
+	private static DeviceMng devMngService;
+	
 	public static final int GET_SOFTWARE_VER_HOST_CMD = 20;
+	
+	public CommonSystem( DeviceMng devMng ) {
+		devMngService = devMng;
+	}
 	
 	public static String commandToString( int cmd ) {
 		byte[] cmd_byte = new byte[2];
@@ -80,13 +87,12 @@ public class CommonSystem {
 		return true;
 	}
 	
-	public static StSoftwareVersion get_software_ver_ipc_lib( StSoftwareVersion stSoftVer ) {
-		Login login = Activator.getLogin();
-		IpcMsgProtoLib ipc_lib = login.getIpcMsgProtoLib();
+	public static StSoftwareVersion get_software_ver_ipc_lib( int dev_id, StSoftwareVersion stSoftVer ) {
 		byte[] receiv_data_byte = new byte[0];
 		
 		try {
-			receiv_data_byte = ipc_lib.cmd_ipc_lib( 
+			receiv_data_byte = devMngService.dev_cmd_ipc_lib(
+							dev_id,
 							commandToString( GET_SOFTWARE_VER_HOST_CMD ), 
 							stSoftVer.toSendByteData(), 
 							stSoftVer.getSendLen() 

@@ -6,29 +6,155 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.qiang.ipccommunicationbundle.service.user.*;
 
+class DatagramSocketNode {
+	int dev_id;
+	DatagramSocket client_sock;
+}
+
+class ServerIpNode {
+	int dev_id;
+	String server_ip;
+}
+
+class ServerPortNode {
+	int dev_id;
+	int server_port;
+}
+
 public class UdpIpcCommunicationImpl implements IpcCommunication {
-	private DatagramSocket client_sock;
-	private String server_ip;
-	private static int server_port = 44245;
+	private List<DatagramSocketNode> client_sock_list = new ArrayList<DatagramSocketNode>();
+	private List<ServerIpNode> server_ip_list = new ArrayList<ServerIpNode>();
+	private static List<ServerPortNode> server_port_list = new ArrayList<ServerPortNode>();
+	private final int DefaultUdpServerPort = 44245;
 	
-	public boolean init( String dev ) throws Exception {
-		server_ip = dev;
+	private boolean check_dev_id_valid( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < client_sock_list.size(); i++ ) {
+			if ( dev_id == client_sock_list.get( i ).dev_id ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private DatagramSocket get_client_socket( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < client_sock_list.size(); i++ ) {
+			if ( dev_id == client_sock_list.get( i ).dev_id ) {
+				return client_sock_list.get( i ).client_sock;
+			}
+		}
+		
+		return null;
+	}
+	
+	private String get_server_ip( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < server_ip_list.size(); i++ ) {
+			if ( dev_id == server_ip_list.get( i ).dev_id ) {
+				return server_ip_list.get( i ).server_ip;
+			}
+		}
+		
+		return null;
+	}
+	
+	private int get_server_port( int dev_id ) {
+		return DefaultUdpServerPort;
+	}
+	
+	private boolean delete_client_sock( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < client_sock_list.size(); i++ ) {
+			if ( dev_id == client_sock_list.get( i ).dev_id ) {
+				client_sock_list.remove( i );
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean delete_server_ip( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < server_ip_list.size(); i++ ) {
+			if ( dev_id == server_ip_list.get( i ).dev_id ) {
+				server_ip_list.remove( i );
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean delete_server_port( int dev_id ) {
+		int i = 0;
+		
+		for ( i = 0; i < server_port_list.size(); i++ ) {
+			if ( dev_id == server_port_list.get( i ).dev_id ) {
+				server_port_list.remove( i );
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean init( int dev_id, String dev ) throws Exception {
+		
+		DatagramSocket clientSock;
+		ServerIpNode servIpTmp;
+		DatagramSocketNode clientSockTmp;
+		ServerPortNode servPortTmp;
+		
+		// check param dev_id
+		if ( false == check_dev_id_valid( dev_id ) ) {
+			System.err.println( "Device ID is already in the list" );
+			return false;
+		}
+		
 		try {
-			client_sock = new DatagramSocket();
-			client_sock.setSoTimeout(5 * 1000);
+			clientSock = new DatagramSocket();
+			clientSock.setSoTimeout(5 * 1000);
 		} catch (SocketException e) {
             System.err.println( "Can't open socket" );
             e.printStackTrace();
             return false;
         }
 		
+		servIpTmp = new ServerIpNode();
+		servIpTmp.dev_id = dev_id;
+		servIpTmp.server_ip = dev;
+		server_ip_list.add( servIpTmp );
+		
+		clientSockTmp = new DatagramSocketNode();
+		clientSockTmp.dev_id = dev_id;
+		clientSockTmp.client_sock = clientSock;
+		client_sock_list.add( clientSockTmp );
+		
+		servPortTmp = new ServerPortNode();
+		servPortTmp.dev_id = dev_id;
+		servPortTmp.server_port = DefaultUdpServerPort;
+		server_port_list.add( servPortTmp );
+		
 		return true;
 	}
 	
-	public int send( byte[] send_buf_byte, int send_len ) throws Exception {
+	public int send( int dev_id, byte[] send_buf_byte, int send_len ) throws Exception {
+		String server_ip;
+		DatagramSocket client_sock;
+		int server_port;
 		InetAddress server_addr;
 		
 		System.out.println( "Udp Ipc Communication Send Data ..." );
@@ -38,6 +164,24 @@ public class UdpIpcCommunicationImpl implements IpcCommunication {
 			System.out.printf("%x ", send_buf_byte[i] );
 		}
 		System.out.printf( "\n" );
+		
+		server_ip = get_server_ip( dev_id );
+		if ( null == server_ip ) {
+			System.err.println( "Get server ip failed" );
+			return -1;
+		}
+		
+		client_sock = get_client_socket( dev_id );
+		if ( null == client_sock ) {
+			System.err.println( "Get socket failed" );
+			return -1;
+		}
+		
+		server_port = get_server_port( dev_id );
+		if ( -1 == server_port ) {
+			System.err.println( "Get server port failed" );
+			return -1;
+		}
 		
 		try {
 			server_addr = InetAddress.getByName( server_ip );
@@ -59,12 +203,19 @@ public class UdpIpcCommunicationImpl implements IpcCommunication {
 		return send_len;
 	}
 	
-	public byte[] receiv()  throws Exception {
+	public byte[] receiv( int dev_id )  throws Exception {
+		DatagramSocket client_sock;
 		byte[] recv_buf = new byte[4096];
 		DatagramPacket recv_packet = new DatagramPacket( recv_buf , recv_buf.length );
 		String recv_data_str;
 		
 		System.out.println( "Udp Ipc Communication Recv Data ..." );
+		
+		client_sock = get_client_socket( dev_id );
+		if ( null == client_sock ) {
+			System.err.println( "Get socket failed" );
+			return null;
+		}
 		
 		try {
 			client_sock.receive( recv_packet );
@@ -85,8 +236,28 @@ public class UdpIpcCommunicationImpl implements IpcCommunication {
 		return recv_data_str.getBytes();
 	}
 	
-	public boolean close() throws Exception {
+	public boolean close( int dev_id ) throws Exception {
+		DatagramSocket client_sock;
+		
+		client_sock = get_client_socket( dev_id );
+		if ( null == client_sock ) {
+			System.err.println( "Get socket failed" );
+			return false;
+		}
+		
 		client_sock.close();
+		
+		if ( false == delete_client_sock( dev_id ) ) {
+			System.err.println( "Delete socket failed" );
+		}
+		
+		if ( false == delete_server_ip( dev_id ) ) {
+			System.err.println( "Delete server ip failed" );
+		}
+		
+		if ( false == delete_server_port( dev_id ) ) {
+			System.err.println( "Delete server port failed" );
+		}
 		
 		return true;
 	}

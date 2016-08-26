@@ -37,7 +37,7 @@ public class NumCmdIpcMsgProtoLibImpl implements IpcMsgProtoLib {
 	private static final byte PassThrMsgType = 0;
 	private static final byte ConfigMsgType = 1;
 	
-	public boolean init( String dev ) throws Exception {
+	public boolean init( int dev_id, String dev ) throws Exception {
 		context = Activator.getContext();
 		service_ref = context.getServiceReference( IpcCommunication.class.getName() );
 		ipc_commu = (IpcCommunication)context.getService( service_ref );
@@ -48,10 +48,10 @@ public class NumCmdIpcMsgProtoLibImpl implements IpcMsgProtoLib {
 		
 		msg_send_buf = new byte[4096];
 		
-		return ipc_commu.init( dev );
+		return ipc_commu.init( dev_id, dev );
 	}
 	
-	public byte[] cmd_ipc_lib( String cmd, byte[] data_byte, int data_len ) throws Exception {
+	public byte[] cmd_ipc_lib( int dev_id, String cmd, byte[] data_byte, int data_len ) throws Exception {
 		
 		int i = 0;
 		int send_len = data_len + ipc_frm_hdr_size + ipc_msg_hdr_size + host_cmd_size;
@@ -85,9 +85,9 @@ public class NumCmdIpcMsgProtoLibImpl implements IpcMsgProtoLib {
 			msg_send_buf[data_pos + i] = data_byte[i];
 		}
 		
-		ipc_commu.send( msg_send_buf, send_len );
+		ipc_commu.send( dev_id, msg_send_buf, send_len );
 		
-		recv_byte = ipc_commu.receiv();
+		recv_byte = ipc_commu.receiv( dev_id );
 		
 		return_byte = new byte[recv_byte.length];
 		
@@ -98,8 +98,8 @@ public class NumCmdIpcMsgProtoLibImpl implements IpcMsgProtoLib {
 		return return_byte;
 	}
 	
-	public boolean close() throws Exception {
-		return ipc_commu.close();
+	public boolean close( int dev_id ) throws Exception {
+		return ipc_commu.close( dev_id );
 	}
 	
 	private short get_corr_tag() {

@@ -1,10 +1,10 @@
-package org.qiang.numcmdipcmsgprotolibimplbundle;
+package org.qiang.devicemngimplbundle;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
-import org.qiang.ipcmsgprotolibbundle.service.user.IpcMsgProtoLib;
-import org.qiang.numcmdipcmsgprotolibimplbundle.impl.NumCmdIpcMsgProtoLibImpl;
+import org.qiang.devicemngbundle.service.user.DeviceMng;
+import org.qiang.devicemngimplbundle.impl.DeviceMngImpl;
 
 public class Activator implements BundleActivator {
 
@@ -22,9 +22,9 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		
-		System.out.println("Number Command Ipc Msg Protocol lib 服务被注册");
+		System.out.println("Device Manage 服务被注册");
         
-        serviceReg = bundleContext.registerService( IpcMsgProtoLib.class.getName(), new NumCmdIpcMsgProtoLibImpl(), null );
+        serviceReg = bundleContext.registerService( DeviceMng.class.getName(), new DeviceMngImpl(), null );
 	}
 
 	/*
@@ -37,7 +37,7 @@ public class Activator implements BundleActivator {
 		if(serviceReg != null)
             serviceReg.unregister();
         
-        System.out.println("Number Command Ipc Msg Protocol lib 服务被卸载");
+        System.out.println("Device Manage 服务被卸载");
 	}
 
 }

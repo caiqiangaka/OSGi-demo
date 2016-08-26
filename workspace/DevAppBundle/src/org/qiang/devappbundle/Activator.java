@@ -2,18 +2,18 @@ package org.qiang.devappbundle;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import org.qiang.devicemngbundle.service.user.DeviceMng;
 
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
-	private static Login login;
+	private static DeviceMng devMng;
+	private static DeviceManageUI devMngUI;
 
 	public static BundleContext getContext() {
 		return context;
-	}
-	
-	public static Login getLogin() {
-		return login;
 	}
 
 	/*
@@ -22,12 +22,20 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		
+		Activator.context = bundleContext;
+		ServiceReference service_ref;
+		
 		System.out.println("devappbundle activator start ...");
 		
-		Activator.context = bundleContext;
+		service_ref = context.getServiceReference( DeviceMng.class.getName() );
+		devMng = (DeviceMng)context.getService( service_ref );
+		if ( null == devMng ) {
+			System.err.println( "No usable DeviceMng service" );
+            return;
+		}
 		
-		login = new Login( bundleContext );
-		login.init();
+		devMngUI = new DeviceManageUI( devMng );
+		devMngUI.init();
 	}
 
 	/*
@@ -37,7 +45,11 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 		System.out.println("devappbundle activator stop ...");
 		
-		login.close();
+		if ( null != devMng ) {
+			devMngUI.close();
+			devMng.close();
+		}
+		
 		Activator.context = null;
 	}
 
